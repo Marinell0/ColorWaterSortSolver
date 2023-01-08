@@ -16,12 +16,6 @@ public class IntegerVial extends AbstractVial<Integer> {
     }
 
     @Override
-    public boolean isSolved() {
-        Integer color = colors.get(0);
-        return colors().allMatch(c -> c.equals(color));
-    }
-
-    @Override
     public Integer emptyColor() {
         return 0;
     }
