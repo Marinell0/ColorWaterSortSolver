@@ -65,7 +65,9 @@ public class AbstractVialTest {
 
     @Test
     public void testTransfer() {
-        vial.transfer(vial2);
+        boolean couldTransfer = vial.transfer(vial2);
+
+        assertTrue("Can transfer to empty vial", couldTransfer);
         // Vial 2 tests
         assertEquals(Colors.GREEN, vial2.get(0));
         assertEquals(Colors.GREEN, vial2.get(1));
@@ -77,5 +79,23 @@ public class AbstractVialTest {
         assertEquals(Colors.CYAN, vial.get(1));
         assertEquals(Colors.EMPTY, vial.get(2));
         assertEquals(Colors.EMPTY, vial.get(3));
+
+        couldTransfer = vial.transfer(vial2);
+        assertFalse("Can't transfer to vial with different color", couldTransfer);
+        // Vial 2 tests
+        assertEquals(Colors.GREEN, vial2.get(0));
+        assertEquals(Colors.GREEN, vial2.get(1));
+        assertEquals(Colors.EMPTY, vial2.get(2));
+        assertEquals(Colors.EMPTY, vial2.get(3));
+
+        // Vial 1 tests
+        assertEquals(Colors.BLUE, vial.get(0));
+        assertEquals(Colors.CYAN, vial.get(1));
+        assertEquals(Colors.EMPTY, vial.get(2));
+        assertEquals(Colors.EMPTY, vial.get(3));
+
+        EnumVial fullVial = new EnumVial(Colors.CYAN, Colors.CYAN, Colors.CYAN, Colors.CYAN);
+        couldTransfer = vial.transfer(fullVial);
+        assertFalse("Can't transfer to full vial", couldTransfer);
     }
 }
