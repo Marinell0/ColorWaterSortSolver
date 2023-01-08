@@ -38,12 +38,34 @@ public abstract class AbstractVial<T> {
         colors.set(pos, value);
     }
 
+    public final T get(int pos) {
+        return colors.get(pos);
+    }
+
     public final boolean isEmpty() {
-        return colors().allMatch(c -> c.equals(emptyColor()));
+        return this.size == 0;
     }
 
     public final boolean isSolved() {
         T color = colors().findFirst().orElse(emptyColor());
         return colors().allMatch(c -> c.equals(color));
+    }
+
+    public final AbstractVial<T> transfer(AbstractVial<T> other) {
+        if (this.isEmpty()) {
+            return this;
+        }
+
+        int pos = this.size - 1;
+        T color = get(pos);
+
+        while(pos > 0 && get(pos) == color) {
+            other.set(other.size, color);
+            other.size++;
+            this.size--;
+            pos--;
+        }
+
+        return this;
     }
 }
