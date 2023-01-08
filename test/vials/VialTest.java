@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import colorenum.Colors;
 
-public class AbstractVialTest {
+public class VialTest {
     Vial vial;
     Vial vial2;
 
