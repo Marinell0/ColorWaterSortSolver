@@ -68,13 +68,17 @@ public abstract class AbstractVial<T> {
         return colors().allMatch(c -> c.equals(color));
     }
 
-    public final AbstractVial<T> transfer(AbstractVial<T> other) {
+    public final boolean transfer(AbstractVial<T> other) {
         if (this.isEmpty()) {
-            return this;
+            return false;
         }
 
         int pos = this.size - 1;
         T color = get(pos);
+
+        if (other.size > 0 && other.get(other.size - 1) != color) {
+            return false;
+        }
 
         do {
             T toTransfer = get(pos);
@@ -83,7 +87,7 @@ public abstract class AbstractVial<T> {
             pos--;
         } while (pos > 0 && get(pos) == color);
 
-        return this;
+        return true;
     }
 
     public String toString() {
