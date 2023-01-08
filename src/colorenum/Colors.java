@@ -1,7 +1,6 @@
 package colorenum;
 
 public enum Colors {
-    EMPTY,
     BLUE,
     CYAN,
     LIGHT_GREEN,
@@ -14,4 +13,11 @@ public enum Colors {
     PINK,
     PURPLE,
     GREY,
+    EMPTY;
+
+    private static Colors[] colors = Colors.values();
+
+    public static Colors[] getColors() {
+        return colors;
+    }
 }
