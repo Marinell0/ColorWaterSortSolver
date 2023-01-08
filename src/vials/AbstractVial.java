@@ -29,25 +29,15 @@ public abstract class AbstractVial<T> {
 
     public abstract T emptyColor();
 
-    public void set(int pos, T value) {
+    public final void set(int pos, T value) {
         colors.set(pos, value);
     }
 
-    public void transfer(AbstractVial<T> other) {
-        for (int i = 0; i < colors.size(); i++) {
-            if (colors.get(i).equals(emptyColor())) {
-                colors.set(i, other.colors.get(i));
-                other.colors.set(i, other.emptyColor());
-                break;
-            }
-        }
-    }
-
-    public boolean isEmpty() {
+    public final boolean isEmpty() {
         return colors().allMatch(c -> c.equals(emptyColor()));
     }
 
-    public boolean isSolved() {
+    public final boolean isSolved() {
         T color = colors().findFirst().orElse(emptyColor());
         return colors().allMatch(c -> c.equals(color));
     }
