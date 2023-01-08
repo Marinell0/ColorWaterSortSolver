@@ -76,7 +76,7 @@ public abstract class AbstractVial<T> {
         int pos = this.size - 1;
         T color = get(pos);
 
-        if (other.size > 0 && other.get(other.size - 1) != color) {
+        if ((other.size > 0 && other.get(other.size - 1) != color) || other.size == MAX_SIZE) {
             return false;
         }
 
@@ -85,7 +85,7 @@ public abstract class AbstractVial<T> {
             other.set(other.size, toTransfer);
             this.set(this.size - 1, emptyColor());
             pos--;
-        } while (pos > 0 && get(pos) == color);
+        } while (pos > 0 && other.size != MAX_SIZE && get(pos) == color);
 
         return true;
     }
