@@ -20,7 +20,7 @@ public class EnumVial extends AbstractVial<Colors> {
 
     @Override
     public Stream<Colors> colors() {
-        return colors.stream();
+        return this.colors.stream();
     }
 
     public String toString() {
