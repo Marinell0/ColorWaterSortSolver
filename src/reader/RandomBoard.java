@@ -1,15 +1,15 @@
 package reader;
 
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 import colorenum.Colors;
 import vials.Vial;
 
-public class RandomBoard {
+public class RandomBoard implements Board {
     private Random random;
 
     public RandomBoard(int seed) {
@@ -33,7 +33,7 @@ public class RandomBoard {
             vials[i] = new Vial();
         }
 
-        HashMap<Colors, Integer> colorsToUseMap = new HashMap<>();
+        Map<Colors, Integer> colorsToUseMap = new EnumMap<>(Colors.class);
         for (int i = 0; i < numColors; i++) {
             colorsToUseMap.put(colors[i], 4);
         }
@@ -49,8 +49,6 @@ public class RandomBoard {
                 });
             }
         }
-
-        Arrays.stream(vials).forEach(System.out::println);
 
         return vials;
     }
