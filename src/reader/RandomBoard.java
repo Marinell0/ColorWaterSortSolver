@@ -41,8 +41,11 @@ public class RandomBoard implements Board {
         for (int vial = 0; vial < numColors; vial++) {
             for (int j = 0; j < 4; j++) {
                 Set<Colors> colorsToUse = EnumSet.copyOf(colorsToUseMap.keySet());
-                Colors color = colorsToUse.toArray(new Colors[0])[random.nextInt(colorsToUse.size())];
+                int randomColor = random.nextInt(colorsToUse.size());
+                Colors color = colorsToUse.toArray(new Colors[0])[randomColor];
+
                 vials[vial].set(j, color);
+
                 colorsToUseMap.computeIfPresent(color, (Colors k, Integer v) -> {
                     int newValue = v - 1;
                     return newValue == 0 ? null : newValue;
