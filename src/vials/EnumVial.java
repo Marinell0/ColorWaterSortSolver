@@ -6,7 +6,19 @@ import colorenum.Colors;
 
 public class EnumVial extends AbstractVial<Colors> {
     public EnumVial() {
-        super(Colors.EMPTY, Colors.EMPTY, Colors.EMPTY, Colors.EMPTY);
+        super();
+    }
+
+    public EnumVial(Colors first) {
+        super(first);
+    }
+
+    public EnumVial(Colors first, Colors second) {
+        super(first, second);
+    }
+
+    public EnumVial(Colors first, Colors second, Colors third) {
+        super(first, second, third);
     }
 
     public EnumVial(Colors first, Colors second, Colors third, Colors fourth) {
@@ -23,12 +35,8 @@ public class EnumVial extends AbstractVial<Colors> {
         return this.colors.stream();
     }
 
-    public String toString() {
-        return colors().map(Enum::name).reduce("", (a, b) -> {
-            if (a.isEmpty()) {
-                return b;
-            }
-            return a + " - " + b;
-        });
+    @Override
+    public String name(Colors color) {
+        return color.name();
     }
 }

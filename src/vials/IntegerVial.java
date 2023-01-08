@@ -4,7 +4,19 @@ import java.util.stream.Stream;
 
 public class IntegerVial extends AbstractVial<Integer> {
     public IntegerVial() {
-        super(0, 0, 0, 0);
+        super();
+    }
+
+    public IntegerVial(Integer first) {
+        super(first);
+    }
+
+    public IntegerVial(Integer first, Integer second) {
+        super(first, second);
+    }
+
+    public IntegerVial(Integer first, Integer second, Integer third) {
+        super(first, second, third);
     }
 
     public IntegerVial(Integer first, Integer second, Integer third, Integer fourth) {
@@ -20,12 +32,8 @@ public class IntegerVial extends AbstractVial<Integer> {
         return 0;
     }
 
-    public String toString() {
-        return colors().map(c -> c.toString()).reduce("", (a, b) -> {
-            if (a.isEmpty()) {
-                return b;
-            }
-            return a + " - " + b;
-        });
+    @Override
+    public String name(Integer color) {
+        return color.toString();
     }
 }
