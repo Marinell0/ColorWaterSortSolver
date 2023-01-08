@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import colorenum.Colors;
-import vials.EnumVial;
+import vials.Vial;
 
 public class RandomBoard {
     private Random random;
@@ -23,14 +23,14 @@ public class RandomBoard {
     /**
      * Returns a random game with vials.
      */
-    public EnumVial[] game() {
+    public Vial[] game() {
         int numColors = random.nextInt(8, 13);
         int numVials = numColors + 2;
         Colors[] colors = Colors.getColors();
 
-        EnumVial[] vials = new EnumVial[numVials];
+        Vial[] vials = new Vial[numVials];
         for (int i = 0; i < numVials; i++) {
-            vials[i] = new EnumVial();
+            vials[i] = new Vial();
         }
 
         HashMap<Colors, Integer> colorsToUseMap = new HashMap<>();

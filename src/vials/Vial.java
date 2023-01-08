@@ -3,16 +3,18 @@ package vials;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public abstract class AbstractVial<T> {
+import colorenum.Colors;
+
+public class Vial {
     private static final int MAX_SIZE = 4;
-    protected ArrayList<T> colors = new ArrayList<>(MAX_SIZE);
-    protected int size = 0;
+    private ArrayList<Colors> colors = new ArrayList<>(MAX_SIZE);
+    private int size = 0;
 
     /**
-     * Generates a vial with the given colors, padded with {@link AbstractVial#emptyColor()}
+     * Generates a vial with the given colors, padded with {@link Vial#emptyColor()}
      * @param colors
      */
-    protected AbstractVial(T ...colors) {
+    public Vial(Colors ...colors) {
         this();
         for (int i = 0; i < colors.length && i < MAX_SIZE; i++) {
             this.colors.set(i, colors[i]);
@@ -23,8 +25,8 @@ public abstract class AbstractVial<T> {
     /**
      * Generates an empty vial with no colors.
      */
-    protected AbstractVial() {
-        Stream<T> emptyColors = Stream.of(emptyColor(), emptyColor(), emptyColor(), emptyColor());
+    public Vial() {
+        Stream<Colors> emptyColors = Stream.of(emptyColor(), emptyColor(), emptyColor(), emptyColor());
         colors.addAll(emptyColors.toList());
         this.size = 0;
     }
@@ -33,17 +35,23 @@ public abstract class AbstractVial<T> {
      * Stream of colors in the vial
      * @return Stream of generic colors T
      */
-    public abstract Stream<T> colors();
+    public Stream<Colors> colors(){
+        return this.colors.stream();
+    }
 
     /**
      * The value that represents an empty color
      * @return The empty color T
      */
-    public abstract T emptyColor();
+    public static Colors emptyColor() {
+        return Colors.EMPTY;
+    }
 
-    public abstract String name(T color);
+    public static String name(Colors color) {
+        return color.toString();
+    }
 
-    public final void set(int pos, T value) {
+    public final void set(int pos, Colors value) {
         if (pos == this.size - 1 && value.equals(emptyColor())) {
             this.size--;
         } else if (pos == this.size && !value.equals(emptyColor())) {
@@ -52,7 +60,7 @@ public abstract class AbstractVial<T> {
         colors.set(pos, value);
     }
 
-    public final T get(int pos) {
+    public final Colors get(int pos) {
         if (this.colors.size() <= pos || pos >= MAX_SIZE) {
             return emptyColor();
         }
@@ -64,24 +72,24 @@ public abstract class AbstractVial<T> {
     }
 
     public final boolean isSolved() {
-        T color = colors().findFirst().orElse(emptyColor());
+        Colors color = colors().findFirst().orElse(emptyColor());
         return colors().allMatch(c -> c.equals(color));
     }
 
-    public final boolean transfer(AbstractVial<T> other) {
+    public final boolean transfer(Vial other) {
         if (this.isEmpty()) {
             return false;
         }
 
         int pos = this.size - 1;
-        T color = get(pos);
+        Colors color = get(pos);
 
         if ((other.size > 0 && other.get(other.size - 1) != color) || other.size == MAX_SIZE) {
             return false;
         }
 
         do {
-            T toTransfer = get(pos);
+            Colors toTransfer = get(pos);
             other.set(other.size, toTransfer);
             this.set(this.size - 1, emptyColor());
             pos--;
@@ -91,7 +99,7 @@ public abstract class AbstractVial<T> {
     }
 
     public String toString() {
-        return "[" + this.size + "] - " + colors().map(this::name).reduce("", (a, b) -> {
+        return "[" + this.size + "] - " + colors().map(Colors::name).reduce("", (a, b) -> {
             if (a.isEmpty()) {
                 return b;
             }

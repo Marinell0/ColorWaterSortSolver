@@ -11,13 +11,13 @@ import org.junit.Test;
 import colorenum.Colors;
 
 public class AbstractVialTest {
-    EnumVial vial;
-    EnumVial vial2;
+    Vial vial;
+    Vial vial2;
 
     @Before
     public void setUp() throws Exception {
-        vial = new EnumVial(Colors.BLUE, Colors.CYAN, Colors.GREEN, Colors.GREEN);
-        vial2 = new EnumVial();
+        vial = new Vial(Colors.BLUE, Colors.CYAN, Colors.GREEN, Colors.GREEN);
+        vial2 = new Vial();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class AbstractVialTest {
 
     @Test
     public void testIsSolved() {
-        EnumVial solved = new EnumVial(Colors.BLUE, Colors.BLUE, Colors.BLUE, Colors.BLUE);
+        Vial solved = new Vial(Colors.BLUE, Colors.BLUE, Colors.BLUE, Colors.BLUE);
 
         assertFalse("Vial should not be solved", vial.isSolved());
         assertTrue("Vial should be solved", vial2.isSolved());
@@ -94,7 +94,7 @@ public class AbstractVialTest {
         assertEquals(Colors.EMPTY, vial.get(2));
         assertEquals(Colors.EMPTY, vial.get(3));
 
-        EnumVial fullVial = new EnumVial(Colors.CYAN, Colors.CYAN, Colors.CYAN, Colors.CYAN);
+        Vial fullVial = new Vial(Colors.CYAN, Colors.CYAN, Colors.CYAN, Colors.CYAN);
         couldTransfer = vial.transfer(fullVial);
         assertFalse("Can't transfer to full vial", couldTransfer);
     }

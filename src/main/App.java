@@ -1,12 +1,10 @@
 package main;
 
-import vials.EnumVial;
+import reader.RandomBoard;
 
 public class App {
     public static void main(String[] args) {
-        EnumVial[] vials = new EnumVial[8];
-        for (int i = 0; i < vials.length; i++) {
-            vials[i] = new EnumVial();
-        }
+        RandomBoard board = new RandomBoard(2);
+        board.game();
     }
 }
