@@ -1,7 +1,6 @@
 package reader;
 
 import java.util.EnumMap;
-import java.util.EnumSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class RandomBoard implements Board {
 
         for (int vial = 0; vial < numColors; vial++) {
             for (int j = 0; j < 4; j++) {
-                Set<Colors> colorsToUse = EnumSet.copyOf(colorsToUseMap.keySet());
+                Set<Colors> colorsToUse = colorsToUseMap.keySet();
                 int randomColor = random.nextInt(colorsToUse.size());
                 Colors color = colorsToUse.toArray(new Colors[0])[randomColor];
 
