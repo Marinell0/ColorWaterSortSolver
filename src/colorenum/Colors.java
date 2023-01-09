@@ -15,6 +15,8 @@ public enum Colors {
     GREY(128, 128, 128),
     EMPTY(0, 0, 0);
 
+    private static final String RESET = "\u001B[0m";
+    private static final String BOLD = "\u001B[1m";
     private int r;
     private int g;
     private int b;
@@ -31,8 +33,13 @@ public enum Colors {
         return colors;
     }
 
+    @Override
     public String toString() {
         return this.consoleFGColor() + this.name() + this.consoleColorReset();
+    }
+
+    public String consoleBold() {
+        return BOLD;
     }
     
     public String consoleFGColor() {
@@ -44,6 +51,6 @@ public enum Colors {
     }
 
     public String consoleColorReset() {
-        return "\u001B[0m";
+        return RESET;
     }
 }
