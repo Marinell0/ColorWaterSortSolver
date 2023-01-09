@@ -10,13 +10,19 @@ import vials.Vial;
 
 public class RandomBoard implements Board {
     private Random random;
+    private Vial[] vials;
 
     public RandomBoard(int seed) {
         this.random = new Random(seed);
+        this.vials = game();
     }
 
     public RandomBoard() {
         this(42);
+    }
+
+    public Vial[] getVials() {
+        return this.vials;
     }
 
     /**
