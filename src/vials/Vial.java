@@ -99,7 +99,7 @@ public class Vial {
     }
 
     public String toString() {
-        return "[" + this.size + "] - " + colors().map(Colors::name).reduce("", (a, b) -> {
+        return "[" + this.size + "] - " + colors().map(Colors::toString).reduce("", (a, b) -> {
             if (a.isEmpty()) {
                 return b;
             }
