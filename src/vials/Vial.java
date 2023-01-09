@@ -22,6 +22,14 @@ public class Vial {
         }
     }
 
+    public Vial(Vial vial) {
+        this();
+        for (int i = 0; i < vial.size; i++) {
+            this.colors.set(i, vial.colors.get(i));
+            this.size++;
+        }
+    }
+
     /**
      * Generates an empty vial with no colors.
      */
