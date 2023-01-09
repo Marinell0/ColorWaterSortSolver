@@ -68,7 +68,11 @@ public class Vial {
     }
 
     public final boolean isEmpty() {
-        return this.size == 0 || this.colors().allMatch(c -> c.equals(emptyColor()));
+        return this.size == 0;
+    }
+
+    public final boolean isFull() {
+        return this.size == MAX_SIZE;
     }
 
     public final boolean isSolved() {
